@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         commands.Clear();
         float horizontalInput = Input.GetAxis("Horizontal");
         commands.Add(new MoveCommand(playerMovement, horizontalInput));
+        float verticalInput = Input.GetAxis("Vertical");
 
         if (Input.GetKey(KeyCode.Space))
         {
