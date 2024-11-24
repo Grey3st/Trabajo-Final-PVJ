@@ -5,10 +5,18 @@ using UnityEngine;
 public class Enemy1Movement : MonoBehaviour
 {
     private Vector3 posicionInicial;
-    public GameObject balaEnemigo;
+    private GameObject balaEnemigo;
+    private PlayerController playerController;
     private void Start()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            playerController = player.GetComponent<PlayerController>();
+        }
+
         posicionInicial = transform.position;
+        balaEnemigo = Resources.Load<GameObject>("BalaEnemigo");
         StartCoroutine(DispararBalaCoroutine());
     }
 
@@ -46,7 +54,14 @@ public class Enemy1Movement : MonoBehaviour
     {
         if (other.CompareTag("BalaJugador"))
         {
-            Debug.Log("Colisión con la bala del jugador detectada");
+
+
+            // Solo llamar a EnemigoEliminado si la referencia está inicializada
+            if (playerController != null)
+            {
+                Debug.Log("Colisión con la bala del jugador detectada");
+                playerController.EnemigoEliminado();
+            }
             Destroy(gameObject); // Destruir el enemigo
         }
     }

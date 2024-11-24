@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Spawner01 : MonoBehaviour
 {
-    public GameObject Enemigo01;  // Prefab de la bala
-    private float tiempoEntreEnemigos = 3f; // Tiempo entre disparos
+    private GameObject Enemigo01;  // Prefab de la bala
+    private float tiempoEntreEnemigos = 2f;
     private Transform puntoDeSpawn;
 
     private void Start()
     {
         puntoDeSpawn = transform;
+        Enemigo01 = Resources.Load<GameObject>("RPG Monster DUO PBR Polyart/Prefabs/PBRDefault/Enemigo01");
         InvokeRepeating("CrearEnemigo", 0f, tiempoEntreEnemigos);
     }
 
