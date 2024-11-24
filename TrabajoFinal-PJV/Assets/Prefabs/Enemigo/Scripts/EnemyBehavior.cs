@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
-    public Transform player;
-    public GameObject bala;
+    private Transform player;
+    private GameObject bala;
+    private PlayerController playerController;
     private float velocidadBala = 5f;
-    private Color originalColor;
     private int colisionesRestantes = 10; // Contador de colisiones restantes
 
     //Patrullaje
@@ -17,6 +17,13 @@ public class EnemyBehavior : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        if (player != null)
+        {
+            playerController = player.GetComponent<PlayerController>();
+        }
+
+        // Carga el prefab de bala desde la carpeta Resources
+        bala = Resources.Load<GameObject>("BalaEnemigoElite");
 
         puntosDePatrullaje = new Vector3[]
         {
@@ -69,7 +76,7 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-   private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         // Verifica si colisiona con la bala del jugador
         if (other.CompareTag("BalaJugador"))
@@ -79,6 +86,11 @@ public class EnemyBehavior : MonoBehaviour
             // Si el enemigo ha recibido 5 colisiones, se destruye
             if (colisionesRestantes <= 0)
             {
+                // Solo llamar a EnemigoEliminado si la referencia está inicializada
+                if (playerController != null)
+                {
+                    playerController.EnemigoEliminado();
+                }
                 Destroy(gameObject); // Destruye el enemigo
             }
 

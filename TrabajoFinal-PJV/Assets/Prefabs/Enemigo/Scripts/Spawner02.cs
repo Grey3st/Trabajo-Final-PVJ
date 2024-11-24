@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Spawner02 : MonoBehaviour
 {
-    public GameObject Enemigo02;
+    private GameObject Enemigo02;
     private Vector3 posicionInicial;
-    private float tiempoEntreEnemigos = 2f;
+    private float tiempoEntreEnemigos = 1f;
     private float velocidad = 6f;
-    private float limiteInferior = -7f;
-    private float limiteSuperior = 7f;
+    private float limiteInferior = -6f;
+    private float limiteSuperior = 6f;
     private int direccion = 1;
 
     private int contadorEnemigos = 0; // Contador de cuántas veces se ha instanciado el objeto
-    private int maximoEnemigos = 5; // Ya que el enunciado no especifica que deben destruirse,
+    private int maximoEnemigos = 20; // Ya que el enunciado no especifica que deben destruirse,
                                     // Se generarán solo cinco Enemigo02 para no tener tantas instancias y generar sobrecarga
 
     private void Start()
     {
         posicionInicial = transform.position;
+        Enemigo02 = Resources.Load<GameObject>("RPG Monster DUO PBR Polyart/Prefabs/PBRDefault/Enemigo02");
         InvokeRepeating("CrearEnemigo", 0f, tiempoEntreEnemigos);
     }
     private void Update()
