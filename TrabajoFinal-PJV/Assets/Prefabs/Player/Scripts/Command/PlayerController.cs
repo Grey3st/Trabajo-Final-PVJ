@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private int enemigosEliminados = 0;
     private int golpesRecibidos = 0;
-    private int enemigosAEliminar = 40; // Número de enemigos para ganar
+    private int enemigosAEliminar = 20; // Número de enemigos para ganar
     private int maxGolpes = 5;  // Número máximo de golpes para perder
     private bool juegoActivo = true; // Verifica si el juego sigue activo
 
