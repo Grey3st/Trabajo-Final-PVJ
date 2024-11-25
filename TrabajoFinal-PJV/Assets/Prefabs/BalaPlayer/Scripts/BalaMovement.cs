@@ -9,7 +9,7 @@ public class BalaMovement : MonoBehaviour
     private float velocidad;
 
     // Agregamos un booleano para determinar si es una bala del jugador o del enemigo
-    public bool esBalaDelEnemigo; // true si es bala del enemigo, false si es del jugador
+    private bool esBalaDelEnemigo; // true si es bala del enemigo, false si es del jugador
 
     private void Start()
     {
