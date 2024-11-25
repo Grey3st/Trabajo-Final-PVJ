@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject spawnBala;
     private PlayerMovement playerMovement;
+    private PlayerJump playerJump;
     private List<ICommand> commands;
 
     void Start()
     {
         playerMovement = gameObject.GetComponent<PlayerMovement>();
+        playerJump = GetComponent<PlayerJump>();
         commands = new List<ICommand>();
     }
 
@@ -20,13 +22,16 @@ public class PlayerController : MonoBehaviour
         commands.Clear();
         float horizontalInput = Input.GetAxis("Horizontal");
         commands.Add(new MoveCommand(playerMovement, horizontalInput));
-        float verticalInput = Input.GetAxis("Vertical");
+        
 
         if (Input.GetKey(KeyCode.Space))
         {
             commands.Add(new AcelerateMoveCommand(playerMovement, horizontalInput));
         }
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            commands.Add(new JumpCommand(playerJump));
+        }
         foreach (var command in commands)
         {
             command.Execute();

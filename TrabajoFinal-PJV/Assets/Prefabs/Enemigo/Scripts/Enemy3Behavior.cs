@@ -7,14 +7,14 @@ public class EnemyChaserBehavior : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent; // Componente de navegación
     private bool sigue = false;
-    private float sigueDuration = 5f; 
-    private float saltoF = 5f; // Fuerza del salto
+    private float sigueDuration = 5f;
+    private float saltoF ; // Fuerza del salto
     private bool enTierra = false; // Verifica si el enemigo está en el suelo
     private Rigidbody rigidb; // Rigidbody para manejar el salto
+    private LayerMask mask;
 
     void Start()
     {
-        
         agent = GetComponent<NavMeshAgent>();
         rigidb = GetComponent<Rigidbody>();
 
@@ -41,7 +41,7 @@ public class EnemyChaserBehavior : MonoBehaviour
     {
         // Lanza un raycast hacia abajo para verificar si está en el suelo
         Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1.1f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.1f,mask))
         {
             enTierra = true; // En el suelo si el raycast golpea algo
         }
@@ -53,9 +53,24 @@ public class EnemyChaserBehavior : MonoBehaviour
 
     private void Jump()
     {
+        // Desactivar el NavMeshAgent antes del salto
+        agent.enabled = false;
+
         // Agrega una fuerza hacia arriba para saltar
         rigidb.AddForce(Vector3.up * saltoF, ForceMode.Impulse);
         Debug.Log("Enemigo saltó!");
+
+        // Reactivar el NavMeshAgent después de un breve retraso
+        StartCoroutine(ReenableNavMeshAgentAfterJump());
+    }
+
+    private IEnumerator ReenableNavMeshAgentAfterJump()
+    {
+        // Esperar a que termine el salto (ajusta este valor según la altura del salto)
+        yield return new WaitForSeconds(0.5f);
+
+        // Reactivar el NavMeshAgent
+        agent.enabled = true;
     }
 
     private IEnumerator ChasePlayer()
@@ -63,7 +78,7 @@ public class EnemyChaserBehavior : MonoBehaviour
         while (true)
         {
             // Inicia el seguimiento del jugador
-            sigue  = true;
+            sigue = true;
             agent.SetDestination(player.position);
 
             // Persigue al jugador durante 5 segundos
@@ -84,8 +99,9 @@ public class EnemyChaserBehavior : MonoBehaviour
         if (other.CompareTag("BalaJugador"))
         {
             Debug.Log("Enemigo golpeado por la bala del jugador.");
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 }
+
 
