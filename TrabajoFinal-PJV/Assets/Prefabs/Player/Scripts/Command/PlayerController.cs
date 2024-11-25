@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private GameObject spawnBala;
     private PlayerMovement playerMovement;
+    private PlayerJump playerJump;
     private List<ICommand> commands;
 
     private int enemigosEliminados = 0;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerMovement = gameObject.GetComponent<PlayerMovement>();
+        playerJump = GetComponent<PlayerJump>();
         commands = new List<ICommand>();
         spawnBala = Resources.Load<GameObject>("BalaPlayer");
     }
@@ -28,12 +30,16 @@ public class PlayerController : MonoBehaviour
         commands.Clear();
         float horizontalInput = Input.GetAxis("Horizontal");
         commands.Add(new MoveCommand(playerMovement, horizontalInput));
+        
 
         if (Input.GetKey(KeyCode.Space))
         {
             commands.Add(new AcelerateMoveCommand(playerMovement, horizontalInput));
         }
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            commands.Add(new JumpCommand(playerJump));
+        }
         foreach (var command in commands)
         {
             command.Execute();

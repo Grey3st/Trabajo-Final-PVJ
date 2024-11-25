@@ -12,6 +12,7 @@ public class AcelerateMoveCommand : ICommand
         this.playerMovement = playerMovement;
         this.input = input;
     }
+        
 
     public void Execute()
     {

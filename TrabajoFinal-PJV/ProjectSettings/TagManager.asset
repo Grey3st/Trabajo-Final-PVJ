@@ -3,15 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BalaEnemigo
+  - BalaEnemigoElite
+  - BalaJugador
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - enemigo
   - Water
   - UI
-  - 
+  - nav
   - 
   - 
   - 
