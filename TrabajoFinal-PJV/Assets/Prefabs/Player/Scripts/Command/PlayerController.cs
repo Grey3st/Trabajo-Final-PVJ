@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -79,7 +80,8 @@ public class PlayerController : MonoBehaviour
             juegoActivo = false;  // Detener el juego
             Debug.Log("¡Victoria! Has eliminado suficientes enemigos.");
             // Aquí puedes añadir más lógica como mostrar una pantalla de victoria, detener el juego, etc.
-            Time.timeScale = 0;  // Detener el juego (opcional)
+            //Time.timeScale = 0;  // Detener el juego (opcional)
+            SceneManager.LoadScene("Victoria");
         }
     }
 
@@ -91,7 +93,8 @@ public class PlayerController : MonoBehaviour
             juegoActivo = false;  // Detener el juego
             Debug.Log("¡Derrota! Has recibido demasiados golpes.");
             // Aquí puedes añadir más lógica como mostrar una pantalla de derrota, reiniciar el juego, etc.
-            Time.timeScale = 0;  // Detener el juego (opcional)
+            //Time.timeScale = 0;  // Detener el juego (opcional)
+            SceneManager.LoadScene("Derrota");
         }
     }
 }
