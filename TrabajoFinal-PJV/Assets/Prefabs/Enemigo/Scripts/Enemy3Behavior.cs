@@ -4,25 +4,28 @@ using UnityEngine.AI;
 
 public class EnemyChaserBehavior : MonoBehaviour
 {
-    public Transform player;
+    public Transform player; // Referencia al jugador
     private NavMeshAgent agent; // Componente de navegación
     private bool sigue = false;
     private float sigueDuration = 5f;
-    private float saltoF ; // Fuerza del salto
+    private float saltoF; // Fuerza del salto
     private bool enTierra = false; // Verifica si el enemigo está en el suelo
     private Rigidbody rigidb; // Rigidbody para manejar el salto
     private LayerMask mask;
+    private int colisionesCount = 0;
+    private float zigzagAmplitud = 2f; // Amplitud del zigzag
+    private float zigzagFrequencia = 1f; // Frecuencia del zigzag
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         rigidb = GetComponent<Rigidbody>();
 
-        // Encontrar al jugador 
+        // Encontrar al jugador
         player = GameObject.FindWithTag("Player").transform;
 
         // Empezar el comportamiento de seguimiento
-        StartCoroutine(ChasePlayer());
+        StartCoroutine(PerseguirEnZigzag());
     }
 
     void Update()
@@ -41,7 +44,7 @@ public class EnemyChaserBehavior : MonoBehaviour
     {
         // Lanza un raycast hacia abajo para verificar si está en el suelo
         Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1.1f,mask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.1f, mask))
         {
             enTierra = true; // En el suelo si el raycast golpea algo
         }
@@ -73,22 +76,34 @@ public class EnemyChaserBehavior : MonoBehaviour
         agent.enabled = true;
     }
 
-    private IEnumerator ChasePlayer()
+    private IEnumerator PerseguirEnZigzag()
     {
         while (true)
         {
-            // Inicia el seguimiento del jugador
             sigue = true;
-            agent.SetDestination(player.position);
 
-            // Persigue al jugador durante 5 segundos
-            yield return new WaitForSeconds(sigueDuration);
+            while (sigue)
+            {
+                // Dirección inicial hacia el jugador
+                Vector3 direccion = (player.position - transform.position).normalized;
 
-            // Detiene el seguimiento
+                // Generar un desplazamiento lateral para el zigzag
+                Vector3 zigzaglateral = transform.right * Mathf.Sin(Time.time * zigzagFrequencia) * zigzagAmplitud;
+
+                // Calcular el destino con el zigzag
+                Vector3 zigzagDestino = transform.position + direccion * agent.speed + zigzaglateral;
+
+                // Establecer el destino del NavMeshAgent
+                agent.SetDestination(zigzagDestino);
+
+                yield return null; // Esperar al próximo frame
+            }
+
+            // Detiene el seguimiento después de un período
             sigue = false;
             agent.ResetPath();
 
-            // Espera 3 segundos antes de volver a perseguir
+            // Espera antes de reiniciar el seguimiento
             yield return new WaitForSeconds(3f);
         }
     }
@@ -98,8 +113,12 @@ public class EnemyChaserBehavior : MonoBehaviour
         // Detecta colisiones con balas del jugador
         if (other.CompareTag("BalaJugador"))
         {
-            Debug.Log("Enemigo golpeado por la bala del jugador.");
-            Destroy(gameObject);
+            colisionesCount++;
+            if (colisionesCount >= 10)
+            {
+                Destroy(gameObject);
+                Debug.Log("Enemigo destruido después de 10 colisiones.");
+            }
         }
     }
 }

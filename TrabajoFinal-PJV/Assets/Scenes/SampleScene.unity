@@ -724,13 +724,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1118101691709380799, guid: 63a2cda83bd74f4419fe253cdb7f8530, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2042604386663552957, guid: 63a2cda83bd74f4419fe253cdb7f8530, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3572956348520651602, guid: 63a2cda83bd74f4419fe253cdb7f8530, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6757586856956443470, guid: 63a2cda83bd74f4419fe253cdb7f8530, type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7356174335882211480, guid: 63a2cda83bd74f4419fe253cdb7f8530, type: 3}
       propertyPath: m_LocalPosition.x
