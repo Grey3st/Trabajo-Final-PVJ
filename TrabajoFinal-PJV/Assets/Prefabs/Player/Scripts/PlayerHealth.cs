@@ -26,10 +26,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private IEnumerator CambiarColor()
     {
-        // Cambia el color a rojo
         playerRenderer.material.SetColor("_Color", Color.red);
-
-        // Espera un segundo
         yield return new WaitForSeconds(1.0f);
 
         // Restaura el color original

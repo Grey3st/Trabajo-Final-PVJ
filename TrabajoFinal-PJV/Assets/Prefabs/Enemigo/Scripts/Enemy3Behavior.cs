@@ -7,7 +7,6 @@ public class EnemyChaserBehavior : MonoBehaviour
     public Transform player; // Referencia al jugador
     private NavMeshAgent agent; // Componente de navegación
     private bool sigue = false;
-    private float sigueDuration = 5f;
     private float saltoF; // Fuerza del salto
     private bool enTierra = false; // Verifica si el enemigo está en el suelo
     private Rigidbody rigidb; // Rigidbody para manejar el salto

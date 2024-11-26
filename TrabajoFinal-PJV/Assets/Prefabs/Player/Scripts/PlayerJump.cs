@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    public float jumpForce = 5f; // Fuerza del salto
+    public float jumpForce = 3f; // Fuerza del salto
     public LayerMask suelo; // Layer para detectar el suelo
     public float raycastDistancia = 1.1f; // Distancia del Raycast
 

@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nombre del Juego
+  m_text: Attack on Hell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 057d174715725ed43952edf7ff92f220, type: 2}
   m_sharedMaterial: {fileID: 6934489325101608318, guid: 057d174715725ed43952edf7ff92f220, type: 2}
@@ -188,8 +188,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294932991
-  m_fontColor: {r: 1, g: 0.47450984, b: 1, a: 1}
+    rgba: 4278452442
+  m_fontColor: {r: 0.85660374, g: 0, b: 0.013755316, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -599,8 +599,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294905270
-  m_fontColor: {r: 0.7137255, g: 0.050980397, b: 1, a: 1}
+    rgba: 4279065343
+  m_fontColor: {r: 1, g: 0.35452083, b: 0.05098039, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1242,8 +1242,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294905270
-  m_fontColor: {r: 0.71307075, g: 0.051886797, b: 1, a: 1}
+    rgba: 4279066879
+  m_fontColor: {r: 1, g: 0.3750693, b: 0.05098039, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
