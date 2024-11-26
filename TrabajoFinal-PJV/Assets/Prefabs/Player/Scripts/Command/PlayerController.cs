@@ -72,28 +72,19 @@ public class PlayerController : MonoBehaviour
         ComprobarVictoria();
     }
 
-    // Verificar si el jugador ha ganado
     private void ComprobarVictoria()
     {
         if (enemigosEliminados >= enemigosAEliminar)
         {
             juegoActivo = false;  // Detener el juego
-            Debug.Log("¡Victoria! Has eliminado suficientes enemigos.");
-            // Aquí puedes añadir más lógica como mostrar una pantalla de victoria, detener el juego, etc.
-            //Time.timeScale = 0;  // Detener el juego (opcional)
             SceneManager.LoadScene("Victoria");
         }
     }
-
-    // Verificar si el jugador ha perdido
     private void ComprobarDerrota()
     {
         if (golpesRecibidos >= maxGolpes)
         {
             juegoActivo = false;  // Detener el juego
-            Debug.Log("¡Derrota! Has recibido demasiados golpes.");
-            // Aquí puedes añadir más lógica como mostrar una pantalla de derrota, reiniciar el juego, etc.
-            //Time.timeScale = 0;  // Detener el juego (opcional)
             SceneManager.LoadScene("Derrota");
         }
     }

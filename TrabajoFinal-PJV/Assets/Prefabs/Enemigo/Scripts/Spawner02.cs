@@ -13,8 +13,7 @@ public class Spawner02 : MonoBehaviour
     private int direccion = 1;
 
     private int contadorEnemigos = 0; // Contador de cuántas veces se ha instanciado el objeto
-    private int maximoEnemigos = 20; // Ya que el enunciado no especifica que deben destruirse,
-                                    // Se generarán solo cinco Enemigo02 para no tener tantas instancias y generar sobrecarga
+    private int maximoEnemigos = 20; 
 
     private void Start()
     {
